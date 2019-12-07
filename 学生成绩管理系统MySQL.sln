@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 17
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "学生成绩管理系统MySQL", "学生成绩管理系统MySQL\学生成绩管理系统MySQL.vcxproj", "{4D815B23-1948-4B61-A06D-750F7F97AFFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Debug|x64.ActiveCfg = Debug|x64
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Debug|x64.Build.0 = Debug|x64
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Debug|x86.ActiveCfg = Debug|Win32
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Debug|x86.Build.0 = Debug|Win32
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Release|x64.ActiveCfg = Release|x64
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Release|x64.Build.0 = Release|x64
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Release|x86.ActiveCfg = Release|Win32
+		{4D815B23-1948-4B61-A06D-750F7F97AFFA}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D734439-3675-40B8-8D2F-82CBC5C9A4ED}
+	EndGlobalSection
+EndGlobal
