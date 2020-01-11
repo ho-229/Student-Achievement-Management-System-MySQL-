@@ -132,16 +132,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GUI.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="SQL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="SQL.cpp" />
-    <ClCompile Include="源.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="学生成绩管理系统MySQL.rc" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,4 @@
+#include"GUI.h"
 #include"SQL.h"
 
 SQL::SQL()
@@ -32,8 +33,8 @@ SQL::~SQL()
 
 unsigned __int64 SQL::Get_table_lines()
 {
-	mysql_query(&this->mysql, "SELECT * FROM STU;");
-	MYSQL_RES*result = mysql_store_result(&this->mysql);
+	this->query("SELECT * FROM STU;");
+	MYSQL_RES*result = this->store_result();
 	unsigned __int64 num = mysql_num_rows(result);
 	mysql_free_result(result);
 	return num;

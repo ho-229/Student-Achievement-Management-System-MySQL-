@@ -91,7 +91,6 @@ void In()
 {
 	int ch;
 	Student Temp;
-	string query;
 start:
 	GUI_1();
 	if (sql.Get_table_lines() == 0)
@@ -117,13 +116,14 @@ start:
 	cout << "Ó¢Óï:";
 	cin >> Temp.English;
 	Temp.sum = Temp.math + Temp.chinese + Temp.English;
-	query = "INSERT INTO STU VALUES(" + to_string(Temp.num) + ",'" + Temp.name + "'," + to_string(Temp.chinese) + ',' + to_string(Temp.math) + ',' + to_string(Temp.English) + ',' + to_string(Temp.sum) + ", NOW());";
-	if (mysql_query(&sql.mysql, query.c_str()))
+	if (sql.query("INSERT INTO STU VALUES(" + to_string(Temp.num) + ",'" + Temp.name 
+		+ "'," + to_string(Temp.chinese) + ',' + to_string(Temp.math) + ',' 
+		+ to_string(Temp.English) + ',' + to_string(Temp.sum) + ", NOW());"))
 	{
 		GUI_1();
 		color(12);
 		gotoxy(10, 8);
-		cerr << "Â¼ÈëÊ§°Ü:" << mysql_error(&sql.mysql) << endl;
+		cerr << "Â¼ÈëÊ§°Ü:" << sql.error() << endl;
 		color(11);
 		gotoxy(10, 10);
 		system("pause");
@@ -160,16 +160,14 @@ void Search()
 	}
 	else
 	{
-		string query;
 	start:
 		GUI_1();
 		gotoxy(13, 6);;
 		cout << "ÇëÊäÈëÑ§ºÅ:";
 		cin >> snum;
-		query = "SELECT * FROM STU WHERE ID=" + to_string(snum) + ';';
-		mysql_query(&sql.mysql, query.c_str());
-		MYSQL_RES*result = mysql_store_result(&sql.mysql);
-		if (mysql_num_rows(result) == 0)
+		sql.query("SELECT * FROM STU WHERE ID=" + to_string(snum) + ';');
+		MYSQL_RES*result = sql.store_result();
+		if (mysql_num_rows(result) == NULL)
 		{
 			GUI_1();
 			color(12);
@@ -243,16 +241,14 @@ void del()
 	}
 	else
 	{
-		string query;
 		MYSQL_RES*result;
 	start:
 		GUI_1();
 		gotoxy(13, 6);;
 		cout << "ÇëÊäÈëÑ§ºÅ:";
 		cin >> snum;
-		query = "SELECT * FROM STU WHERE ID=" + to_string(snum) + ';';
-		mysql_query(&sql.mysql, query.c_str());
-		result = mysql_store_result(&sql.mysql);
+		sql.query("SELECT * FROM STU WHERE ID=" + to_string(snum) + ';');
+		result = sql.store_result();
 		if (mysql_num_rows(result) != 1)
 		{
 			GUI_1();
@@ -267,19 +263,18 @@ void del()
 		}
 		else
 		{
-			query = "DELETE FROM STU WHERE ID=" + to_string(snum) + ';';
 			color(12);
 			gotoxy(13, 7);
 			cout << "ÕÒµ½Ñ§ºÅ£¬ÊÇ·ñÉ¾³ý£¿(y/n)";
 			cin >> chose;
 			if (chose == 'Y' || chose == 'y')
 			{
-				if (mysql_query(&sql.mysql, query.c_str()))
+				if (sql.query("DELETE FROM STU WHERE ID=" + to_string(snum) + ';'))
 				{
 					GUI_1();
 					color(12);
 					gotoxy(10, 7);
-					cout << "É¾³ýÊ§°Ü:" << mysql_error(&sql.mysql) << endl;
+					cout << "É¾³ýÊ§°Ü:" << sql.error() << endl;
 					color(11);
 					gotoxy(10, 9);
 					system("pause");
@@ -323,15 +318,13 @@ void modify()
 	else
 	{
 		MYSQL_RES*result;
-		string query;
 	start:
 		GUI_1();
 		gotoxy(13, 6);
 		cout << "ÇëÊäÈëÑ§ºÅ:";
 		cin >> snum;
-		query = "SELECT * FROM STU WHERE ID=" + to_string(snum) + ';';
-		mysql_query(&sql.mysql, query.c_str());
-		result = mysql_store_result(&sql.mysql);
+		sql.query("SELECT * FROM STU WHERE ID=" + to_string(snum) + ';');
+		result = sql.store_result();
 		if (mysql_num_rows(result) == 0)
 		{
 			GUI_1();
@@ -360,13 +353,14 @@ void modify()
 			cout << "Ó¢Óï:";
 			cin >> Temp.English;
 			Temp.sum = Temp.math + Temp.chinese + Temp.English;
-			query = "UPDATE STU SET name='" + Temp.name + "',chinese=" + to_string(Temp.chinese) + ",math=" + to_string(Temp.math) + ",English=" + to_string(Temp.English) + ",sum=" + to_string(Temp.sum) + " where ID=" + to_string(snum) + ';';
-			if (mysql_query(&sql.mysql, query.c_str()))
+			if (sql.query("UPDATE STU SET name='" + Temp.name + "',chinese=" + to_string(Temp.chinese) 
+				+ ",math=" + to_string(Temp.math) + ",English=" + to_string(Temp.English) 
+				+ ",sum=" + to_string(Temp.sum) + " where ID=" + to_string(snum) + ';'))
 			{
 				GUI_1();
 				color(12);
 				gotoxy(10, 8);
-				cerr << "ÐÞ¸ÄÊ§°Ü:" << mysql_error(&sql.mysql) << endl;
+				cerr << "ÐÞ¸ÄÊ§°Ü:" << sql.error() << endl;
 				color(11);
 				gotoxy(10, 9);
 				system("pause");
@@ -406,10 +400,10 @@ void Print_allstu(bool mode)
 	else
 	{
 		if (mode == true)
-			mysql_query(&sql.mysql, "SELECT * FROM STU ORDER BY ID ASC;");	//ÒÔÑ§ºÅÕýÐò´òÓ¡
+			sql.query("SELECT * FROM STU ORDER BY ID ASC;");		//ÒÔÑ§ºÅÕýÐò´òÓ¡
 		else
-			mysql_query(&sql.mysql, "SELECT * FROM STU ORDER BY sum DESC;");//ÒÔ³É¼¨µ¹Ðò´òÓ¡
-		MYSQL_RES*result = mysql_store_result(&sql.mysql);
+			sql.query("SELECT * FROM STU ORDER BY sum DESC;");		//ÒÔ³É¼¨µ¹Ðò´òÓ¡
+		MYSQL_RES*result = sql.store_result();
 		MYSQL_ROW row;
 		GUI_2();
 		color(14);

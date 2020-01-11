@@ -2,7 +2,7 @@
 
 #include<iostream>
 #include<mysql.h>
-#include"GUI.h"
+
 #pragma comment(lib,"libmysql.lib")
 using namespace std;
 
@@ -12,9 +12,14 @@ class SQL
 public:
 	SQL();
 	~SQL();
-	MYSQL mysql;
+
 	unsigned __int64 Get_table_lines();	//获取数据个数
+	/*封装MySQL API*/
+	inline int query(string my_query) { return mysql_query(&this->mysql, my_query.c_str()); }
+	inline const char* error() { return mysql_error(&this->mysql); }
+	inline MYSQL_RES* store_result() { return mysql_store_result(&this->mysql); }
 private:
+	MYSQL mysql;
 	/*根据自己实际填写*/
 	const char user[7] = { "ho229" };						//ROOT Name
 	const char password[12] = { "123456" };					//ROOT PassWord
